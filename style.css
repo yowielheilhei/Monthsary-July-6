@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
+
+body {
+    background-color: #fdf6f5; 
+    color: #4a4a4a;
+    overflow-x: hidden;
+}
+
+#hero-screen {
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: opacity 1s ease-out;
+    padding: 20px 10px;
+}
+
+/* --- NEW: Envelope Floating Animation --- */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+#envelope-wrapper {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.5s ease;
+    position: absolute; 
+    z-index: 10;
+    animation: float 3s ease-in-out infinite; /* Applies the float */
+}
+
+#envelope-wrapper:hover {
+    animation: none; /* Stops floating when hovered */
+    transform: scale(1.05);
+}
+
+.envelope-icon {
+    font-size: 8rem;
+    display: block;
+}
+
+/* --- NEW: Timer Styles --- */
+#countdown-timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* This guarantees it stays perfectly centered */
+    z-index: 20;
+    text-align: center;
+    transition: opacity 0.5s ease;
+}
+
+#timer-text {
+    font-size: 6rem;
+    color: #d48b94;
+    font-style: italic;
+}
+
+/* Flower Animation */
+#flower-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1s ease;
+}
+
+#flower-container.bloom {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#flower-container h1 {
+    color: #d48b94;
+    font-style: italic;
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+}
+
+.flower-img {
+    width: 350px; 
+    max-width: 90vw; 
+    height: auto;
+    display: block;
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1)); 
+}
+
+/* Message Screen */
+#message-screen {
+    padding: 20px 5% 60px 5%; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+#message-screen.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message-content {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    line-height: 1.8;
+    font-size: 1.2rem;
+}
+
+.message-content h1 {
+    color: #d48b94;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: justify; /* This aligns the text to both left and right edges */
+}
+
+.hidden {
+    pointer-events: none;
+    opacity: 0 !important;
+}
+
+/* Mobile Responsive Rules */
+@media (max-width: 600px) {
+    .envelope-icon { font-size: 6rem; }
+    #flower-container h1 { font-size: 1.6rem; }
+    #timer-text { font-size: 4rem; }
+    .message-content {
+        padding: 25px; 
+        font-size: 1.05rem; 
+    }
+    .message-content h1 { font-size: 1.5rem; }
+}
